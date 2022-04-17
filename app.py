@@ -61,5 +61,5 @@ def result():
     print( user, passwd,host,database)
     data = db.command(command)
     return render_template('output.html', content="Output \n\n\n {}".format(data))
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+#    app.run(debug=True)
