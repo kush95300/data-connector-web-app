@@ -10,7 +10,7 @@
 <body>
     <div class="main-container"> 
         <div class="mysql_login">
-            <form action="output" method="post">
+            <form action="/output" method="post">
                 <label for="host">Host URL:</label>
                 <input type="text" placeholder="host url" name="url" id="url">
                 </br>
@@ -20,8 +20,8 @@
                 <label for="password">Password:</label>
                 <input type="password"  name="password" id="password">
                 </br>
-                <label for="password">Command:</label>
-                <input type="text"  name="command" id="command">
+                <span><input type="checkbox" name="remember" id="remember">
+                    Remember Me</span>
                 </br>
                 </br>
                 <input type="submit" value="Login" class="submit">
