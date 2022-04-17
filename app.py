@@ -21,16 +21,16 @@ def output():
     password = request.form['password']
     host = request.form['url']
     cmd = request.form['command']
-    #db = pymysql.connect(host=host,user=user,password=password,database="kush" )
+    db = pymysql.connect(host=host,user=user,password=password )
     # prepare a cursor object using cursor() method
-    #cursor = db.cursor()
+    cursor = db.cursor()
     # execute SQL query using execute() method.
-    #cursor.execute(cmd)
+    cursor.execute(cmd)
     # Fetch a single row using fetchone() method.
-    #data = cursor.fetchall()
+    data = cursor.fetchall()
     # disconnect from server
-    #db.close()
-    return render_template('output.html', content="hi from kaushal {} {} {} {}".format(user, password, host, cmd))
+    db.close()
+    return render_template('output.html', content="{}".format(data))
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
