@@ -1,0 +1,7 @@
+#!/bin/bash
+
+yum install python3 git -y
+git clone https://github.com/kush95300/data-connector-web-app.git /code
+cd  /code
+pip3 install -r requirement.txt
+chmod +x server.sh
