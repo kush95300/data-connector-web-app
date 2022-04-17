@@ -6,15 +6,38 @@ import pymysql
 
 
 # Open database connection
+class Db:
+    def __init__(self):
+        print("DB object created")  
 
-db = ""
+    def set(self,user,passwd,host):
+        self.user = user
+        self.passwd = passwd
+        self.host = host       
+
+   
+    def connect(self):
+        self.db = pymysql.connect(host=self.host, user=self.user, passwd=self.passwd)
+        return self.db
+
+    def command(self,cmd):
+        con = self.connect()
+        cur = con.cursor()
+        cur.execute(cmd)
+        con.commit()
+        return cur.fetchall()
+
+    def exit(self):
+        self.db.close()
 
 app = Flask(__name__)
+
+db = Db()
 
 @app.route('/')
 @app.route('/index')
 def index():
-    try: db.close()
+    try: db.exit()
     except: print("No connection to close")
     return render_template('index.html')
 
@@ -24,23 +47,14 @@ def output():
     user = request.form['username']
     password = request.form['password']
     host = request.form['url']
-    #cmd = request.form['command']
-    global db
-    db = pymysql.connect(host=host,user=user,password=password )
+    db.set(user,password,host)
     return render_template('output.html', content="Enter Command to proceed")
 
 @app.route('/result', methods=['POST'])
 def result():
     command = request.form['command']
-    #cmd = request.form['command']
-    # db = pymysql.connect(host=host,user=user,password=password )
-    # # prepare a cursor object using cursor() method
-    cursor = db.cursor()
-    # # execute SQL query using execute() method.
-    cursor.execute(command)
-    # # Fetch a single row using fetchone() method.
-    data = cursor.fetchall()
-    return render_template('output.html', content="hi {}".format(data))
+    data = db.command(command)
+    return render_template('output.html', content="Output \n\n\n {}".format(data))
 
 
 if __name__ == '__main__':
