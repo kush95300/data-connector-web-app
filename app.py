@@ -5,7 +5,7 @@ import pymysql
 
 
 # Open database connection
-#db = pymysql.connect(host="",user="root",password="soni",database="kush" )
+
 
 app = Flask(__name__)
 
@@ -21,17 +21,16 @@ def output():
     password = request.form['password']
     host = request.form['url']
     cmd = request.form['command']
+    #db = pymysql.connect(host=host,user=user,password=password,database="kush" )
+    # prepare a cursor object using cursor() method
+    #cursor = db.cursor()
+    # execute SQL query using execute() method.
+    #cursor.execute(cmd)
+    # Fetch a single row using fetchone() method.
+    #data = cursor.fetchall()
+    # disconnect from server
+    #db.close()
     return render_template('output.html', content="hi from kaushal {} {} {} {}".format(user, password, host, cmd))
 
 if __name__ == '__main__':
     app.run(debug=True)
-#db.close()
-
-
-    # # prepare a cursor object using cursor() method
-    # cursor = db.cursor()
-    # # execute SQL query using execute() method.
-    # cursor.execute("SELECT * from kk")
-    # # Fetch a single row using fetchone() method.
-    # data = cursor.fetchall()
-    # # disconnect from server
